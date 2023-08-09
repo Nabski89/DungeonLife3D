@@ -10,7 +10,7 @@ public class DelverTeleport : MonoBehaviour
         DelverNavigateController Delver = other.GetComponent<DelverNavigateController>();
         if (Delver != null)
         {
-            Delver.transform.position = TeleportLocation.position;
+            Delver.agent.Warp(TeleportLocation.position);
         }
     }
 }

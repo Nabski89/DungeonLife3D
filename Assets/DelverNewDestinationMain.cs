@@ -14,6 +14,7 @@ public class DelverNewDestinationMain : MonoBehaviour
         {
             Debug.Log("Delver Reached: " + gameObject.name);
             Delver.TravelPointMAIN = TravelPointMAIN;
+            Delver.agent.destination = TravelPointMAIN.position;
         }
     }
 }
