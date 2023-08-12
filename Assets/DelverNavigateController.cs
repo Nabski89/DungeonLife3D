@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class DelverNavigateController : MonoBehaviour
 {
+    public int SeatTracking = -1;
     public UnityEngine.AI.NavMeshAgent agent;
     public Transform TravelPointMAIN;
     //    public Transform TravelPointSUB;
@@ -37,4 +38,7 @@ public class DelverNavigateController : MonoBehaviour
 */
 
     }
+
+    public void DelverSetDestination()
+    { agent.destination = TravelPointMAIN.position; }
 }
