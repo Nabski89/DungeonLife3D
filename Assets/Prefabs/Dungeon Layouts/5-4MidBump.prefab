@@ -122,6 +122,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: 5-4MidBump
       objectReference: {fileID: 0}
+    - target: {fileID: 4390209571456225506, guid: 605ab9582cacd93409991a471bc44a25, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4390209571456225506, guid: 605ab9582cacd93409991a471bc44a25, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7706849024861999194, guid: 605ab9582cacd93409991a471bc44a25, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
