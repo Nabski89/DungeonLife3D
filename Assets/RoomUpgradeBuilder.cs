@@ -63,7 +63,7 @@ public class RoomUpgradeBuilder : MonoBehaviour
             SpawnerConstructable roomConstructable = GetComponentInChildren<SpawnerConstructable>();
             if (roomConstructable != null)
             {
-                roomConstructable.TryToBuild();
+           //     roomConstructable.TryToBuild();
             }
         }
     }
