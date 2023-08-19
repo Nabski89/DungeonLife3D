@@ -8,6 +8,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 228085964784942121, guid: c2a16a3039e63e645a50cf066867e49f, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: e7ba499eb9c558f44915c99581eeb0a6, type: 3}
     - target: {fileID: 865638563373002106, guid: c2a16a3039e63e645a50cf066867e49f, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -48,6 +52,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 900275039994414287, guid: c2a16a3039e63e645a50cf066867e49f, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 900275039994414287, guid: c2a16a3039e63e645a50cf066867e49f, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 900275039994414287, guid: c2a16a3039e63e645a50cf066867e49f, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7539428788215058762, guid: c2a16a3039e63e645a50cf066867e49f, type: 3}
       propertyPath: m_Name
       value: SpawnTreasure
@@ -56,24 +72,25 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 7539428788215058762, guid: c2a16a3039e63e645a50cf066867e49f, type: 3}
+    - targetCorrespondingSourceObject: {fileID: 1456836016208121933, guid: c2a16a3039e63e645a50cf066867e49f, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 8447402185086733887}
+      addedObject: {fileID: 4769994527034381436}
   m_SourcePrefab: {fileID: 100100000, guid: c2a16a3039e63e645a50cf066867e49f, type: 3}
---- !u!1 &2918727349400209987 stripped
+--- !u!1 &6059506599239256900 stripped
 GameObject:
-  m_CorrespondingSourceObject: {fileID: 7539428788215058762, guid: c2a16a3039e63e645a50cf066867e49f, type: 3}
+  m_CorrespondingSourceObject: {fileID: 1456836016208121933, guid: c2a16a3039e63e645a50cf066867e49f, type: 3}
   m_PrefabInstance: {fileID: 4620703692635380489}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &8447402185086733887
+--- !u!114 &4769994527034381436
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2918727349400209987}
+  m_GameObject: {fileID: 6059506599239256900}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 31585e65b1abcbd499eeda87872e9c9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  toSpawn: {fileID: 0}

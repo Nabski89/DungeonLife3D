@@ -13,39 +13,69 @@ public class RoomConstructable : MonoBehaviour
     }
     public void TryToBuild()
     {
-        Doorway[] doorways = GetComponentsInChildren<Doorway>();
 
-        foreach (Doorway doorway in doorways)
+        bool buildReady = true;
+        bool DoorCheck = false;
+        //check that no rooms are blocked
+        foreach (Transform child in transform)
         {
-            Collider[] colliders = Physics.OverlapBox(
-                doorway.transform.position,
-                doorway.transform.localScale / 2f,
-                doorway.transform.rotation
-            );
-
-            foreach (Collider collider in colliders)
+            RoomBlockOnBuild roomBlock = child.GetComponent<RoomBlockOnBuild>();
+            if (roomBlock != null)
             {
-                if (collider != doorway.GetComponent<Collider>() && collider.GetComponent<Doorway>() != null)
+                if (roomBlock.clearToBuild == false)
+                    buildReady = false;
+            }
+
+            //check to make sure that we have a door touching a door
+            Component[] Doors;
+            Doors = GetComponentsInChildren<Doorway>();
+            foreach (Doorway doortocheck in Doors)
+            {
+                if (doortocheck.clearToBuild == true)
+                    DoorCheck = true;
+            }
+        }
+
+        if (buildReady == false)
+            Debug.Log("Could not build, location blocked");
+        if (DoorCheck == false)
+            Debug.Log("Could not build, No Doorway Connection");
+
+        //unparent our current room and disable the builder
+        if (buildReady == true && DoorCheck == true)
+        {
+            GameObject RoomBuilderTool = transform.parent.parent.gameObject;
+            //set our parent to the nearest dungeon in our room builders dungeon tool
+            Transform nearestObject = null;
+            float shortestDistance = Mathf.Infinity;
+            Debug.Log("We have a dungeon");
+            foreach (GameObject dungeonObject in RoomBuilderTool.GetComponent<WallBuilder>().Dungeons)
+            {
+                float distance = Vector3.Distance(transform.position, dungeonObject.transform.position);
+                if (distance < shortestDistance)
                 {
-                    Transform otherParent = collider.transform.parent;
-                    if (otherParent != null)
-                    {
-                        //reset the Wall Builder Script int that keeps track of our rotation.
-                        transform.parent.gameObject.GetComponent<WallBuilder>().BuildNumber = 0;
-
-
-                        Destroy(gameObject);
-                        Destroy(GetComponent<RoomConstructable>());
-                        otherParent.gameObject.SetActive(false);
-                        Destroy(otherParent.GetComponent<RoomConstructable>());
-                        return;
-                    }
-
+                    shortestDistance = distance;
+                    nearestObject = dungeonObject.transform;
                 }
+            }
+            transform.parent = nearestObject;
+
+            //need to make sure the room is rotated correctly BUG ALERT
+            RoomBuilderTool.SetActive(false);
+            Doorway[] doorways = GetComponentsInChildren<Doorway>();
+
+
+            Component[] BlockerTiles;
+            BlockerTiles = GetComponentsInChildren<RoomBlockOnBuild>();
+            foreach (RoomBlockOnBuild Blocks in BlockerTiles)
+            {
+                Blocks.GetComponent<MeshRenderer>().enabled = false;
+                Destroy(Blocks);
             }
         }
     }
-    //this was a bad chatgpt thing that tried to hard
+
+
 
     void DoBuild()
     {

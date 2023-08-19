@@ -8,6 +8,7 @@ public class WallBuilder : MonoBehaviour
     public Transform RoomHolder;
     public Transform RoomPool;
     public int BuildNumber = 0;
+    public GameObject[] Dungeons;
 
     public Vector3 MouseLocation;
     float MouseRotation;
@@ -23,6 +24,7 @@ public class WallBuilder : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //keep ourselves locked to a center frame
         Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(ray, out RaycastHit raycastHit))
         {
@@ -33,47 +35,52 @@ public class WallBuilder : MonoBehaviour
             transform.position = MouseLocation;
         }
 
-
+        //rotate smoothly
         MouseRotation += Input.mouseScrollDelta.y * 30;
         Quaternion target = Quaternion.Euler(0, Mathf.Round(MouseRotation / 90) * 90, 0);
         transform.rotation = Quaternion.Slerp(transform.rotation, target, Time.deltaTime * 5);
 
+        //change the type you are building
         if (Input.GetMouseButtonDown(2))
         {
             Transform firstChild = RoomHolder.GetChild(0);
-            firstChild.SetParent(RoomPool);
-            firstChild.localPosition = Vector3.one * -100f;
+            if (firstChild != null)
+            {
+                firstChild.SetParent(RoomPool);
+                firstChild.localPosition = Vector3.one * -100f;
+            }
             GetNewRoomFromRoomPool();
             // This needs to be a flip somehow          transform.localScale = new Vector3(-1 * transform.localScale.x, 1, 1);
         }
-        //change the type you are building
+        //change the build pivot
         if (Input.GetMouseButtonDown(1))
         {
             ChangeOffset();
         }
+
         //spawn the object
         if (Input.GetMouseButtonDown(0))
         {
             RoomConstructable roomConstructable = GetComponentInChildren<RoomConstructable>();
-
             if (roomConstructable != null)
             {
                 roomConstructable.TryToBuild();
             }
-
-            //    Instantiate(WallList[BuildNumber], transform.position + (Vector3.up * 0.5f), Quaternion.Euler(0, Mathf.Round(MouseRotation / 90) * 90, 0));
-            //            Destroy(gameObject);
         }
     }
-    void GetNewRoomFromRoomPool()
+    public void GetNewRoomFromRoomPool()
     {
         Transform firstChild = RoomPool.GetChild(0);
-        firstChild.SetParent(RoomHolder);
-        firstChild.localPosition = Vector3.zero;
-        firstChild.rotation = firstChild.parent.transform.rotation;
+        if (firstChild != null & GetComponentInChildren<RoomConstructable>() == null)
+        {
+            firstChild.SetParent(RoomHolder);
+            firstChild.localPosition = Vector3.zero;
+            firstChild.rotation = firstChild.parent.transform.rotation;
+        }
         BuildNumber = 0;
         ChangeOffset();
     }
+    //this helps us move the room around to different open doorways
     private void ChangeOffset()
     {
         RoomConstructable roomConstructable = GetComponentInChildren<RoomConstructable>();

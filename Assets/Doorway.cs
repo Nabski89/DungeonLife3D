@@ -4,15 +4,37 @@ using UnityEngine;
 
 public class Doorway : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public Material[] materialColors;
+    public Renderer objectRenderer;
+    private void Start()
     {
-        
+        objectRenderer = GetComponent<Renderer>();
+        if (materialColors.Length > 0)
+        {
+            objectRenderer.material = materialColors[0];
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+
+    public bool clearToBuild = false;
+
+    void OnTriggerStay(Collider other)
     {
-        
+        if (other.GetComponent<Doorway>() != null)
+            clearToBuild = true;
+    }
+
+    void OnTriggerExit(Collider other)
+    {
+        clearToBuild = false;
+    }
+
+    private void Update()
+    {
+        if (clearToBuild == true)
+
+            objectRenderer.material = materialColors[0];
+        else
+            objectRenderer.material = materialColors[1];
     }
 }
