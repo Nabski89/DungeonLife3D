@@ -65,6 +65,13 @@ public class RoomConstructable : MonoBehaviour
             Doorway[] doorways = GetComponentsInChildren<Doorway>();
 
 
+            //replace the floor tiles
+            TileChange[] tileChangeComponents = transform.parent.GetComponentsInChildren<TileChange>();
+            foreach (TileChange tileChange in tileChangeComponents)
+            {
+                tileChange.enabled = true;
+            }
+            //change our blockers
             Component[] BlockerTiles;
             BlockerTiles = GetComponentsInChildren<RoomBlockOnBuild>();
             foreach (RoomBlockOnBuild Blocks in BlockerTiles)

@@ -27,8 +27,8 @@ public class CameraController : MonoBehaviour
         }
         if (Input.GetKey("up") || mousePos.y > Screen.height - 20)
         {
-            position = transform.TransformPoint(Vector3.up * .2f);
-            transform.position = position;
+            //the transform bits will be rotated relative to the camera leading you to slowly zoom in
+            transform.position += (Vector3.forward * .2f);
         }
         if (Input.GetKey("right") || mousePos.x > Screen.width - 20)
         {
@@ -37,8 +37,7 @@ public class CameraController : MonoBehaviour
         }
         if (Input.GetKey("down") || mousePos.y < 20)
         {
-            position = transform.TransformPoint(Vector3.down * .2f);
-            transform.position = position;
+            transform.position -= (Vector3.forward * .2f);
         }
         if (Input.GetKeyDown(KeyCode.H))
         {

@@ -7,6 +7,7 @@ public class SelectMoveToPosition : MonoBehaviour
     public Camera cam;
     public UnityEngine.AI.NavMeshAgent MoveAgent;
     public GameObject MoveObjectSelected;
+    public InfoBox UIElement;
     public GameObject MoveHighlighter;
     public Vector3 TargetLocation;
     public bool Click = false;
@@ -22,7 +23,7 @@ public class SelectMoveToPosition : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
             Click = true;
         if (Input.GetMouseButtonDown(1))
-            MoveObjectSelected = null;
+            ClearSelection();
     }
     void FixedUpdate()
     {
@@ -70,11 +71,18 @@ public class SelectMoveToPosition : MonoBehaviour
                     if (hitPoint.collider != null)
                     {
                         MoveObjectSelected = hitPoint.collider.gameObject;
-
+                        //send it to the UI
+                        UIElement.Select(MoveObjectSelected);
                         Debug.Log("The Object We are tracking is " + MoveObjectSelected);
                     }
                 }
             }
         }
     }
+    private void ClearSelection()
+    {
+        MoveObjectSelected = null;
+        UIElement.Clear();
+    }
+
 }

@@ -19,7 +19,7 @@ public class SpawnerConstructable : MonoBehaviour
 
         if (other.GetComponent<RoomBlockPermanent>() != null)
         {
-            Debug.Log("Upgrade touched a room blocker");
+         //   Debug.Log("Upgrade touched a room blocker");
             spriteRenderer.color = Color.cyan; // Change color to red
             BuildPossible = true;
         }
